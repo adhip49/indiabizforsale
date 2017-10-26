@@ -51,36 +51,51 @@ $("#btn-save").click(function (e) {
         name: $('#name').val(),
         details: $('#details').val(),
     }
-    //used to determine the http verb to use [add=POST], [update=PUT]
-    var state = $('#btn-save').val();
-    var type = "POST"; //for creating new resource
-    var product_id = $('#product_id').val();;
-    var my_url = url;
-    if (state == "update"){
-        type = "PUT"; //for updating existing resource
-        my_url += '/' + product_id;
+    my_name = $.trim($('#name').val());
+    my_details = $.trim($('#details').val());
+
+    if($.trim(my_name) == ''){
+        swal('Please enter product name');
+        e.preventDefault();
     }
-    console.log(formData);
-    $.ajax({
-        type: type,
-        url: my_url,
-        data: formData,
-        dataType: 'json',
-        success: function (data) {
-            console.log(data);
-            var product = '<tr id="product' + data.id + '"><td>' + data.id + '</td><td>' + data.name + '</td><td>' + data.details + '</td>';
-            product += '<td><button class="btn btn-warning btn-detail open_modal" value="' + data.id + '">Edit</button>';
-            product += ' <button class="btn btn-danger btn-delete delete-product" value="' + data.id + '">Delete</button></td></tr>';
-            if (state == "add"){ //if user added a new record
-                $('#products-list').append(product);
-            }else{ //if user updated an existing record
-                $("#product" + product_id).replaceWith( product );
-            }
-            $('#frmProducts').trigger("reset");
-            $('#myModal').modal('hide')
-        },
-        error: function (data) {
-            console.log('Error:', data);
+    if($.trim(my_details) == ''){
+        swal('Please enter product details');
+        e.preventDefault();
+    }
+
+    if(($.trim(my_name) != '') && ($.trim(my_details) != '')) {
+        //used to determine the http verb to use [add=POST], [update=PUT]
+        var state = $('#btn-save').val();
+        var type = "POST"; //for creating new resource
+        var product_id = $('#product_id').val();
+        var my_url = url;
+        if (state == "update") {
+            type = "PUT"; //for updating existing resource
+            my_url += '/' + product_id;
         }
-    });
+        console.log(formData);
+        $.ajax({
+            type: type,
+            url: my_url,
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                var product = '<tr id="product' + data.id + '"><td>' + data.id + '</td><td>' + data.name + '</td><td>' + data.details + '</td>';
+                product += '<td><button class="btn btn-info btn-detail open_modal" value="' + data.id + '">Edit</button>';
+                product += ' <button class="btn btn-danger btn-delete delete-product" value="' + data.id + '">Delete</button></td></tr>';
+                if (state == "add") { //if user added a new record
+                    $('#products-list').append(product);
+                } else { //if user updated an existing record
+                    $("#product" + product_id).replaceWith(product);
+                }
+                $('#frmProducts').trigger("reset");
+                $('#myModal').modal('hide');
+                location.reload();
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+    }
 });

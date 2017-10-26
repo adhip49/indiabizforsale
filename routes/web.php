@@ -1,6 +1,4 @@
 <?php
-
-use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,27 +10,28 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/productajaxCRUD', function () {
-    $products = App\Products::all();
-    return view('ajax.index')->with('products',$products);
-});
 
-Route::get('productajaxCRUD/{product_id?}',function($product_id){
-    $product = App\Products::find($product_id);
-    return response()->json($product);
-});
-Route::post('productajaxCRUD',function(Request $request){
-    $product = App\Products::create($request->input());
-    return response()->json($product);
-});
-Route::put('productajaxCRUD/{product_id?}',function(Request $request,$product_id){
-    $product = App\Products::find($product_id);
-    $product->name = $request->name;
-    $product->details = $request->details;
-    $product->save();
-    return response()->json($product);
-});
-Route::delete('productajaxCRUD/{product_id?}',function($product_id){
-    $product = App\Products::destroy($product_id);
-    return response()->json($product);
-});
+//To list all the products in the table
+
+Route::get('productajaxCRUD', 'ProductsController@product_listing');
+
+
+// To select one product using its product id
+
+Route::get('productajaxCRUD/{product_id?}', 'ProductsController@find_product');
+
+
+// To create a new product by posting all the data we got from the form
+
+Route::post('productajaxCRUD', 'ProductsController@create_product');
+
+
+//To update the details of already created product
+
+Route::put('productajaxCRUD/{product_id?}', 'ProductsController@update_product');
+
+
+//To delete the products which are already added
+
+Route::delete('productajaxCRUD/{product_id?}', 'ProductsController@delete_product');
+
