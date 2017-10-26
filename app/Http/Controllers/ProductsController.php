@@ -51,5 +51,8 @@ class ProductsController extends Controller
 
     }
 
+    public static function redirect(){
 
+        return redirect('productajaxCRUD');
+    }
 }

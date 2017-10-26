@@ -10,6 +10,7 @@
 |
 */
 
+Route::get('/', 'ProductsController@redirect');
 
 //To list all the products in the table
 
