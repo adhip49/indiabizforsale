@@ -1,4 +1,4 @@
-Sample CRUD Operations Using Laravel and AJAX
+**Sample CRUD Operations Using Laravel and AJAX**
 
 Step 1 : Create a .env file copy the setting in .env.example file . 
 Update your database connections in the .env file
@@ -15,9 +15,9 @@ http://localhost:8000/productajaxCRUD
 
 
 
-Task 1 :
+**Task 1 :
 How would you store the information in a database (suggest a schema or data model)?
-What kind of database would you choose for implementing the said schema/data model Relational or non-relational? And why?
+What kind of database would you choose for implementing the said schema/data model Relational or non-relational? And why?**
 
 1. We can store the informations using a mysql database . We can create multiple tables in a database and will use a PRIMARY KEY constraint to uniquely identify each record in a database table and a FOREIGN KEY to link two tables together.
 
@@ -28,9 +28,9 @@ Relational databases use Structured Querying Language (SQL), making them a good 
 
 If we want our application to handle a lot of complicated querying, database transactions and routine analysis of data,it's best we stick with a relational database. And if the application is going to focus on doing many database transactions, it’s important that those transactions are processed reliably. This is where ACID (the set of properties that guarantee database transactions are processed reliably) really matters, and where referential integrity comes into play.
 
-Task 2 : 
+**Task 2 : 
 Implement a simple CRUD application with any modern MVC framework, using language of your choice.
- Also provide a reason for choosing a specific language and framework to build this.
+ Also provide a reason for choosing a specific language and framework to build this.**
 
 1. I have used Laravel to create a CRUD application - PHP MVC Framework used to develop web applications 
 
