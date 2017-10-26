@@ -1,4 +1,4 @@
-Sample CRUD Operations Using Laravel and AJAX
+**Sample CRUD Operations Using Laravel and AJAX**
 
 Step 1 : Create a .env file copy the setting in .env.example file . 
 Update your database connections in the .env file
